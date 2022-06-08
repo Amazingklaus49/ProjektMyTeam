@@ -9,7 +9,7 @@ import java.util.stream.StreamSupport;
 
 @RestController
 //@CrossOrigin("https://localhost:3000")
-@RequestMapping("driver")
+@RequestMapping("/f1team")
 public class F1RestController {
     @Autowired
     private DriverRepository driverRepository;
@@ -23,8 +23,37 @@ public class F1RestController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("driver/{id}")
     public Driver getDriverByID(@PathVariable long id) {
         return driverRepository.findById(id).get();
     }
+
+    /*@PostMapping("driver/")
+    public void createDriver(@RequestBody Driver driver) {
+        //todo.setId(todoList.size()+1);
+        driver.setDriverID(driverRepository.count());
+        driverRepository.
+    }*/
+
+    @PutMapping ("driver/{id}")
+    public Driver updateDriverByID(@PathVariable long id, @RequestBody Driver driver) {
+        Driver toUpdate = driverRepository.findById(id).get();
+        toUpdate.setVorname(driver.getVorname());
+        toUpdate.setNachname(driver.getNachname());
+        toUpdate.setJahrgang(driver.getJahrgang());
+        toUpdate.setNationalitaet(driver.getNationalitaet());
+        toUpdate.setTeam(driver.getTeam());
+        return toUpdate;
+    }
+
+    @DeleteMapping("driver/{id}")
+    public void deleteDriverByID(@PathVariable long id) {
+        driverRepository.deleteById(id);
+    }
+
+    @DeleteMapping("driver")
+    public void deleteDrivers() {
+        driverRepository.deleteAll();
+    }
+
 }
