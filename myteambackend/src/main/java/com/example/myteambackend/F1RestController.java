@@ -28,12 +28,10 @@ public class F1RestController {
         return driverRepository.findById(id).get();
     }
 
-    /*@PostMapping("driver/")
+    @PostMapping("driver/")
     public void createDriver(@RequestBody Driver driver) {
-        //todo.setId(todoList.size()+1);
-        driver.setDriverID(driverRepository.count());
-        driverRepository.
-    }*/
+        driverRepository.save(driver);
+    }
 
     @PutMapping ("driver/{id}")
     public Driver updateDriverByID(@PathVariable long id, @RequestBody Driver driver) {

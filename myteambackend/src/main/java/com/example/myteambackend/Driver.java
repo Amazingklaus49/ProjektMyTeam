@@ -15,7 +15,6 @@ public class Driver {
     private String nationalitaet;
     @ManyToOne
     @JoinColumn(name="teamIDFS", nullable=false)
-    @JsonIgnore
     private Team team;
 
     public long getDriverID() {
