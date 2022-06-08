@@ -9,7 +9,7 @@ import java.util.stream.StreamSupport;
 
 @RestController
 //@CrossOrigin("https://localhost:3000")
-@RequestMapping("/driver")
+@RequestMapping("driver")
 public class F1RestController {
     @Autowired
     private DriverRepository driverRepository;
