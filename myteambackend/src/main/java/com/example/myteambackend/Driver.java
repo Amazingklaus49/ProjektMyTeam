@@ -1,26 +1,27 @@
 package com.example.myteambackend;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
 public class Driver {
-    private int driverID;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long driverID;
     private String nachname;
     private String vorname;
     private int jahrgang;
     private String nationalitaet;
-    private int teamIDFS;
+    @ManyToOne
+    @JoinColumn(name="teamIDFS", nullable=false)
+    @JsonIgnore
+    private Team team;
 
-    public Driver(int driverID, String nachname, String vorname, int jahrgang, String nationalitaet, int teamIDFS) {
-        this.driverID = driverID;
-        this.nachname = nachname;
-        this.vorname = vorname;
-        this.jahrgang = jahrgang;
-        this.nationalitaet = nationalitaet;
-        this.teamIDFS = teamIDFS;
-    }
-
-    public int getDriverID() {
+    public long getDriverID() {
         return driverID;
     }
-    public void setDriverID(int driverID) {
+    public void setDriverID(long driverID) {
         this.driverID = driverID;
     }
     public String getNachname() {
@@ -47,10 +48,10 @@ public class Driver {
     public void setNationalitaet(String nationalitaet) {
         this.nationalitaet = nationalitaet;
     }
-    public int getTeamIDFS() {
-        return teamIDFS;
+    public Team getTeam() {
+        return team;
     }
-    public void setTeamIDFS(int teamIDFS) {
-        this.teamIDFS = teamIDFS;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

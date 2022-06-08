@@ -1,18 +1,21 @@
 package com.example.myteambackend;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Team {
-    private int teamID;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long teamID;
     private String name;
+    @OneToMany(mappedBy="team")
+    private List<Driver> drivers;
 
-    public Team(int teamID, String name) {
-        this.teamID = teamID;
-        this.name = name;
-    }
-
-    public int getTeamID() {
+    public long getTeamID() {
         return teamID;
     }
-    public void setTeamID(int teamID) {
+    public void setTeamID(long teamID) {
         this.teamID = teamID;
     }
     public String getName() {
@@ -20,5 +23,11 @@ public class Team {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
     }
 }
