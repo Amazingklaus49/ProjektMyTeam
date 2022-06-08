@@ -1,30 +1,26 @@
 package com.example.myteambackend;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@RestController
-//@CrossOrigin("https://localhost:3000")
-@RequestMapping("/driver")
-public class F1RestController {
-    @Autowired
+public class MainController {
+    @Autowired //anstatt Constructor
     private DriverRepository driverRepository;
 
-    @GetMapping("/")
-    public List<Driver> getDrivers() {
-        return StreamSupport.stream(
+    @GetMapping("") // http://localhost:8080
+    public String home(Model model) {
+        //umwandlung in normale liste
+        List<Driver> drivers = StreamSupport.stream(
                         driverRepository
                                 .findAll()
                                 .spliterator(), false)
                 .collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}")
-    public Driver getDriverByID(@PathVariable long id) {
-        return driverRepository.findById(id).get();
+        model.addAttribute("drivers", drivers);
+        return "index";
     }
 }
