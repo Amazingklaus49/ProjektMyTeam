@@ -1,10 +1,17 @@
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Form from 'react-bootstrap/Form'
 
 function App() {
 
-    const drivers = [
+    const [drivers,setDrivers] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:8080/f1team/")
+            .then(r => r.json())
+            .then(data => setDrivers(data))
+    },[])
+
+    /*const drivers = [
         {firstName: "Heinz", lastName: "Smith", nationality: "Developer"},
         {firstName: "Martin", lastName: "Juan", nationality: "Teacher"},
         {firstName: "Santa", lastName: "Claus", nationality: "Deliverer"},
@@ -14,12 +21,12 @@ function App() {
         {firstName: "Kit", lastName: "Rachal", nationality: "Unemployed"},
         {firstName: "Donnette", lastName: "Heiden", nationality: "Cooker"},
         {firstName: "Bill", lastName: "Bill", nationality: "Clown"}
-    ]
+    ]*/
 
     const [pat, setpat] = useState("Smith");
 
     const filtered = drivers.filter(obj => {
-        return obj.lastName === pat;
+        return obj.nachname === pat;
     });
 
 
@@ -40,9 +47,10 @@ function App() {
                 {filtered.map(obj => {
                     return (
                         <div key={obj.id}>
-                            <h4>First Name: {obj.firstName}</h4>
-                            <h4>Last Name: {obj.lastName}</h4>
-                            <h4>Nationality: {obj.nationality}</h4>
+                            <h4>First Name: {obj.vorname}</h4>
+                            <h4>Last Name: {obj.nachname}</h4>
+                            <h4>Jahrgang: {obj.jahrgang}</h4>
+                            <h4>Nationality: {obj.nationalitaet}</h4>
                         </div>
                     );
                 })}

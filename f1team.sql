@@ -34,7 +34,7 @@ CREATE TABLE `Driver` (
   `nationalitaet` varchar(250) NOT NULL,
   `teamIDFS` int NOT NULL,
   `driverID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Daten für Tabelle `Driver`
@@ -50,21 +50,6 @@ INSERT INTO `Driver` (`vorname`, `nachname`, `jahrgang`, `nationalitaet`, `teamI
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur für Tabelle `hibernate_sequence`
---
-
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Daten für Tabelle `hibernate_sequence`
---
-
-INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(7);
-
 -- --------------------------------------------------------
 
 --
@@ -74,7 +59,7 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
 CREATE TABLE `Team` (
   `name` varchar(250) NOT NULL,
   `teamID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Daten für Tabelle `Team`
