@@ -1,15 +1,16 @@
 import './App.css';
 import {useEffect, useState} from "react";
 import Form from 'react-bootstrap/Form'
+import {Button} from "react-bootstrap";
 
 function App() {
 
-    const [drivers,setDrivers] = useState([])
+    const [drivers, setDrivers] = useState([])
     useEffect(() => {
         fetch("http://localhost:8080/f1team/")
             .then(r => r.json())
             .then(data => setDrivers(data))
-    },[])
+    }, [])
 
     /*const drivers = [
         {firstName: "Heinz", lastName: "Smith", nationality: "Developer"},
@@ -23,11 +24,16 @@ function App() {
         {firstName: "Bill", lastName: "Bill", nationality: "Clown"}
     ]*/
 
-    const [pat, setpat] = useState("Smith");
+    const [pat, setpat] = useState("Verstappen");
 
     const filtered = drivers.filter(obj => {
         return obj.nachname === pat;
     });
+
+    const [firstName,setFirstName] = useState("")
+    const [lastName,setLastName] = useState("")
+    const [year,setYear] = useState("")
+    const [nationality,setNationality] = useState("")
 
 
     return (
@@ -49,11 +55,32 @@ function App() {
                         <div key={obj.id}>
                             <h4>First Name: {obj.vorname}</h4>
                             <h4>Last Name: {obj.nachname}</h4>
-                            <h4>Jahrgang: {obj.jahrgang}</h4>
+                            <h4>Year of Birth: {obj.jahrgang}</h4>
                             <h4>Nationality: {obj.nationalitaet}</h4>
                         </div>
                     );
                 })}
+
+                <Form>
+                    <h1>add driver</h1>
+                    <label>First Name</label>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Control type="text"/>
+                    </Form.Group>
+                    <label>Last Name</label>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Control type="text"/>
+                    </Form.Group>
+                    <label>Year of Birth</label>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Control type="number"/>
+                    </Form.Group>
+                    <label>Nationality</label>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Control type="text"/>
+                    </Form.Group>
+                    <Button onClick={}>Submit</Button>
+                </Form>
 
             </div>
         </>
