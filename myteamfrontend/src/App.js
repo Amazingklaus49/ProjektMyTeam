@@ -9,7 +9,10 @@ function App() {
     useEffect(() => {
         fetch("http://localhost:8080/f1team/")
             .then(r => r.json())
-            .then(data => setDrivers(data))
+            .then(data => {
+                console.log(data)
+                setDrivers(data)
+            })
     }, [])
 /*
     const [test, setTest] = useState([
@@ -36,10 +39,9 @@ function App() {
     const [nationality,setNationality] = useState("")
 
     function buttonHandler(){
-        let tmparray = [...drivers, {vorname: firstName, nachname: lastName,jahrgang: year, nationalitaet: nationality} ]
-        setDrivers(tmparray)
+        let tmpArray = [...drivers, {vorname: firstName, nachname: lastName,jahrgang: year, nationalitaet: nationality} ]
+        setDrivers(tmpArray)
     }
-
 
     return (
         <>
