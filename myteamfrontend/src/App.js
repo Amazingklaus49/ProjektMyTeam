@@ -11,8 +11,8 @@ function App() {
             .then(r => r.json())
             .then(data => setDrivers(data))
     }, [])
-
-    /*const drivers = [
+/*
+    const [test, setTest] = useState([
         {firstName: "Heinz", lastName: "Smith", nationality: "Developer"},
         {firstName: "Martin", lastName: "Juan", nationality: "Teacher"},
         {firstName: "Santa", lastName: "Claus", nationality: "Deliverer"},
@@ -22,9 +22,9 @@ function App() {
         {firstName: "Kit", lastName: "Rachal", nationality: "Unemployed"},
         {firstName: "Donnette", lastName: "Heiden", nationality: "Cooker"},
         {firstName: "Bill", lastName: "Bill", nationality: "Clown"}
-    ]*/
-
-    const [pat, setpat] = useState("Verstappen");
+    ])
+*/
+    const [pat, setPat] = useState("Verstappen");
 
     const filtered = drivers.filter(obj => {
         return obj.nachname === pat;
@@ -35,6 +35,11 @@ function App() {
     const [year,setYear] = useState("")
     const [nationality,setNationality] = useState("")
 
+    function buttonHandler(){
+        let tmparray = [...drivers, {vorname: firstName, nachname: lastName,jahrgang: year, nationalitaet: nationality} ]
+        setDrivers(tmparray)
+    }
+
 
     return (
         <>
@@ -44,11 +49,10 @@ function App() {
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control type="text" value={pat} onChange={(event) => {
-                            setpat(event.target.value)
+                            setPat(event.target.value)
                         }}/>
                     </Form.Group>
                 </Form>
-
 
                 {filtered.map(obj => {
                     return (
@@ -64,24 +68,30 @@ function App() {
                 <Form>
                     <h1>add driver</h1>
                     <label>First Name</label>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicEmail" onChange={(event) => {
+                        setFirstName(event.target.value)
+                    }}>
                         <Form.Control type="text"/>
                     </Form.Group>
                     <label>Last Name</label>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicEmail" onChange={(event) => {
+                        setLastName(event.target.value)
+                    }}>
                         <Form.Control type="text"/>
                     </Form.Group>
                     <label>Year of Birth</label>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicEmail" onChange={(event) => {
+                        setYear(event.target.value)}}>
                         <Form.Control type="number"/>
                     </Form.Group>
                     <label>Nationality</label>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicEmail" onChange={(event) => {
+                        setNationality(event.target.value)
+                    }}>
                         <Form.Control type="text"/>
                     </Form.Group>
-                    <Button onClick={}>Submit</Button>
+                    <Button onClick={buttonHandler}>Submit</Button>
                 </Form>
-
             </div>
         </>
     );
